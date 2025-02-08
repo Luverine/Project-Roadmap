@@ -19,4 +19,8 @@ public class Task {
     // Getters
     public int getId(){ return id; }
     public String getDescription(){ return description; }
+
+    // Helper methods
+    private String getCurrentTimestamp() {}
+
 }
