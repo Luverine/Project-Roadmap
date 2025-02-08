@@ -8,7 +8,9 @@ public class Task {
     private String updatedAt;
 
     // Constructors
-    public Task(int id, String description){}
+    public Task(int id, String description){
+        this.id = id;
+    }
     
 
 
