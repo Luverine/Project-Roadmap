@@ -7,6 +7,8 @@ public class Task {
     private String createdAt;
     private String updatedAt;
 
+    // Constructors
+    public Task(int id, String description){}
     
 
 
