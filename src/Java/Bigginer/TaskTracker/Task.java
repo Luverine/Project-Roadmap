@@ -12,11 +12,11 @@ public class Task {
         this.id = id;
         this.description = description;
         this.status = "Todo";
-        this.createdAt = System.currentTimeMillis();
+        this.createdAt = getCurrentTimestamp();
         this.updatedAt = this.createdAt;
     }
-    
 
-
-
+    // Getters
+    public int getId(){ return id; }
+    public String getDescription(){ return description; }
 }
