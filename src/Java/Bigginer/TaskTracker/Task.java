@@ -4,7 +4,7 @@ public class Task {
     private int id;
     private final String description;
     private final String status;
-    private String createdAt;
+    private final String createdAt;
     private String updatedAt;
 
     // Constructors
