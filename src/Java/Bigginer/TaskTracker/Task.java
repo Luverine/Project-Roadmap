@@ -11,7 +11,9 @@ public class Task {
     public Task(int id, String description){
         this.id = id;
         this.description = description;
-
+        this.status = "Todo";
+        this.createdAt = System.currentTimeMillis();
+        this.updatedAt = this.createdAt;
     }
     
 
