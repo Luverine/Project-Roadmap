@@ -3,7 +3,7 @@ package Java.Bigginer.TaskTracker;
 public class Task {
     private int id;
     private final String description;
-    private String status;
+    private final String status;
     private String createdAt;
     private String updatedAt;
 
