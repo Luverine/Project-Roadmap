@@ -10,6 +10,8 @@ public class Task {
     // Constructors
     public Task(int id, String description){
         this.id = id;
+        this.description = description;
+
     }
     
 
