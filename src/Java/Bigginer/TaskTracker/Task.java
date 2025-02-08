@@ -5,7 +5,7 @@ public class Task {
     private final String description;
     private final String status;
     private final String createdAt;
-    private String updatedAt;
+    private final String updatedAt;
 
     // Constructors
     public Task(int id, String description){
