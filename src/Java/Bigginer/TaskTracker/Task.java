@@ -13,7 +13,7 @@ public class Task {
         this.description = description;
         this.status = "Todo";
         this.createdAt = getCurrentTimestamp();
-        this.updatedAt = this.createdAt;
+        this.updatedAt = this.createdAt;//
     }
 
     // Getters
