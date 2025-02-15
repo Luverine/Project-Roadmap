@@ -21,7 +21,7 @@ public class Task {
     public String getDescription(){ return description; }
 
     // Helper methods
-    private String getCurrentTimestamp() {}
+    private String getCurrentTimestamp() { return ""; }
 //    private String getCurrentTimestamp() {}
 //    private String getCurrentTimestamp() {}
 //    private String getCurrentTimestamp() {}
