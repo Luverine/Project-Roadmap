@@ -20,10 +20,7 @@ public class Task {
     }
 
     // Getters
-    public int getId() {
-        return id;
-    }
-
+    public int getId() { return id; }
     public String getDescription() { return description; }
     public String getStatus() { return status; }
     public String getCreatedAt() { return createdAt; }
