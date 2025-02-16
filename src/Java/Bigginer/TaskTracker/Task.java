@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     private int id;
     private String description;
-    private String status; // "todo", "in-progress", "done"
+    private String status; // "todo", "in-progress", "completed"
     private String createdAt;
     private String updatedAt;
 
@@ -33,7 +33,7 @@ public class Task {
     }
 
     public void setStatus(String status) {
-        if (status.equals("todo") || status.equals("in-progress") || status.equals("done")) {
+        if (status.equals("todo") || status.equals("in-progress") || status.equals("completed")) {
             this.status = status;
             updateTimestamp();
         } else {
