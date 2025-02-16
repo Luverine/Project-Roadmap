@@ -24,8 +24,7 @@ public class Task {
         return id;
     }
 
-    public String getDescription() {
-        return description; }
+    public String getDescription() { return description; }
     public String getStatus() { return status; }
     public String getCreatedAt() { return createdAt; }
     public String getUpdatedAt() { return updatedAt; }
