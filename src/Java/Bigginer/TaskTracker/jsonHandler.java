@@ -1,9 +1,18 @@
 package Java.Bigginer.TaskTracker;
 
-public class jsonHandler {
-    public static class json {
-        private String FILE_NAME = "Task.json";
+import java.io.File;
+import java.io.IOException;
 
-        if()
-    }
+public class jsonHandler {
+    private String FILE_NAME = "Task.json";
+
+        public static void initializeFile(){
+            try{
+                if (File.exists(path.of(FILE_NAME))) {
+                    File.write(path.of(FILE_NAME), "[]".getBytes());
+                }
+            }catch(IOException e){
+                System.out.println("Error Initializing JSON file: " + e.getMessage());
+            }
+        }
 }
