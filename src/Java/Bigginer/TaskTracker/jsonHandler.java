@@ -6,7 +6,7 @@ import java.nio.file.*;
 
 
 public class jsonHandler {
-    private String FILE_NAME = "task.json";
+    private static final String FILE_NAME = "task.json";
     //Initializing JSON File
     public static void initializeFile() {
         try {
@@ -22,9 +22,13 @@ public class jsonHandler {
     public static JsonArray readTask() {
         try {
             InputStream is = new FileInputStream(FILE_NAME);
-            JsonReader reader = new JsonReader(is);
+            JsonReader reader = Json.createReader(is);
             JsonArray tasks = reader.readArray();
-
+            reader.close();
+            return tasks;
+        } catch (Exception e) {
+            System.out.println("Error reading tasks: " + e.getMessage());
+            return Json.createArrayBuilder().build();
         }
     }
 
