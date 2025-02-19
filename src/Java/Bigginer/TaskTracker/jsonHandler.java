@@ -1,14 +1,15 @@
 package Java.Bigginer.TaskTracker;
 
 import java.io.*;
-import java.io.IOException;
+import javax.json.*;
+import java.nio.file.*;
+
 
 public class jsonHandler {
-    private String FILE_NAME = "Task.json";
-
-        public static void initializeFile(){
+    private String FILE_NAME = "task.json";
+    public static void initializeFile(){
             try{
-                if (File.exists(path.of(FILE_NAME))) {
+                if (!File.exists(path.of(FILE_NAME))) {
                     File.write(path.of(FILE_NAME), "[]".getBytes());
                 }
             }catch(IOException e){
