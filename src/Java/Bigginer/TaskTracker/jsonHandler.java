@@ -10,9 +10,10 @@ public class jsonHandler {
     //Initializing JSON File
     public static void initializeFile() {
         try {
-            if (!File.exists(path.of(FILE_NAME))) {
-                File.write(path.of(FILE_NAME), "[]".getBytes());
+            if (File.exists(path.of(FILE_NAME))) {
+                return;
             }
+            File.write(path.of(FILE_NAME), "[]".getBytes());
         } catch (IOException e) {
             System.out.println("Error Initializing JSON file: " + e.getMessage());
         }
