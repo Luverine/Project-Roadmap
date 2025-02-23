@@ -19,7 +19,7 @@ public class jsonHandler {
         }
     }
 
-    // Reading JSON File g
+    // Reading JSON File
     public static JsonArray readTask() {
         try {
             InputStream is = new FileInputStream(FILE_NAME);
