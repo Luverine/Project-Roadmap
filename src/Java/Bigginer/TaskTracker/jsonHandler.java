@@ -34,5 +34,14 @@ public class jsonHandler {
     }
 
     // Writing Tasks in JSON File
-
+    public static void writeTasks(JsonArray tasks) throws FileNotFoundException {
+        try {
+            OutputStream os = new FileOutputStream(FILE_NAME);
+            JsonWriter writer = Json.createWriter(os);
+            writer.writeArray(tasks);
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error writing tasks : " + e.getMessage());
+        }
+    }
 }
