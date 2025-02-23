@@ -19,7 +19,7 @@ public class jsonHandler {
         }
     }
 
-    // Reading JSON File
+    // Reading Tasks JSON File
     public static JsonArray readTask() {
         try {
             InputStream is = new FileInputStream(FILE_NAME);
@@ -32,5 +32,7 @@ public class jsonHandler {
             return Json.createArrayBuilder().build();
         }
     }
+
+    // Writing Tasks in JSON File
 
 }
