@@ -7,13 +7,15 @@ import java.nio.file.*;
 
 public class jsonHandler {
     private static final String FILE_NAME = "task.json";
+
+    // check whether the file exists or not
+    public static boolean exists() {
+        return Files.exists(Paths.get(FILE_NAME));
+    }
     //Initializing JSON File
     public static void initializeFile() {
         try {
-            if (File.exists(path.of(FILE_NAME))) {
-                return;
-            }
-            File.write(path.of(FILE_NAME), "[]".getBytes());
+            if (!exists()) Files.write(Path.of(FILE_NAME), "[]".getBytes());
         } catch (IOException e) {
             System.out.println("Error Initializing JSON file: " + e.getMessage());
         }
