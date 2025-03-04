@@ -25,7 +25,7 @@ public class TaskManager {
             if(task.getId() == id){
                 task.setDescription(newDescription);
                 saveTasksToJson();
-                System.out.println("Task supdated successfully.");
+                System.out.println("Task updated successfully.");
                 return;
             }
         }
