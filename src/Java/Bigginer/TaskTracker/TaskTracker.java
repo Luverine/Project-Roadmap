@@ -30,7 +30,29 @@ public class TaskTracker {
                         } catch (NumberFormatException e) {
                             System.out.println("Invalid task ID.");
                         }
-                    }
+                    } else System.out.println("Usage : update <task_id> <new_description>");
+                    break;
+                case "delete":
+                    try {
+                        int id = Integer.parseInt(argument);
+                        taskManager.deleteTask(id);
+                    } catch (NumberFormatException e) { System.out.println("Usage: update <task_id> <new_description>"); }
+                    break;
+                case "status":
+                        String[] statusArgs = argument.split(" ", 2);
+                        if (statusArgs.length == 2){
+                            try {
+                                int id = Integer.parseInt(statusArgs[0]);
+                                taskManager.changeTaskStatus(id, statusArgs[1]);
+                            } catch (NumberFormatException e){
+                                System.out.println("Invalid Task ID.");
+                            }
+                        } else System.out.println("Usage: status <task_id> <todo|in-progress|done>");
+                        break;
+                case "list":
+                    if (argument.isEmpty()) taskManager.listTasks();
+                    else taskManager.listTaskByStatus(argument);
+                    break;
             }
         }
     }
