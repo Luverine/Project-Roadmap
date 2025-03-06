@@ -2,7 +2,7 @@ package Java.Bigginer.TaskTracker.src;
 
 import java.util.List;
 import java.util.Scanner;
-import Java.Begginer.TaskTracker.*;
+import Java.Bigginer.TaskTracker.*
 
 public class TaskTrackerCLI {
     public static void main(String[] args) {
