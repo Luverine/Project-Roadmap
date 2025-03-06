@@ -1,3 +1,4 @@
+
 # Task Tracker CLI
 
 This is a simple command-line interface (CLI) application built in **Java** to help you track and manage your tasks. You can use this app to add, update, delete, mark tasks as done, and view tasks based on their status.
@@ -10,6 +11,11 @@ This is a simple command-line interface (CLI) application built in **Java** to h
 - Mark tasks as "in-progress" or "done"
 - List tasks based on their status (`todo`, `in-progress`, `done`)
 - CLI-based interface with commands
+
+## **Project URL**
+```bash
+  https://roadmap.sh/projects/task-tracker
+```
 
 ## Setup
 
