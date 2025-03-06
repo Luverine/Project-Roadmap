@@ -1,4 +1,4 @@
-package Java.Bigginer.TaskTracker;
+package Java.Bigginer.TaskTracker.src;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Task {
     private final int id;
     private String description;
-    private String status; // "todo", "in-progress", "completed"
+    private String status; // "todo", "in-progress", "done"
     private String createdAt;
     private String updatedAt;
 
@@ -14,7 +14,7 @@ public class Task {
     public Task(int id, String description) {
         this.id = id;
         this.description = description;
-        this.status = "todo"; // Default status is "todo"
+        this.status = "todo"; // Default status
         this.createdAt = getCurrentTimestamp();
         this.updatedAt = this.createdAt;
     }
@@ -33,25 +33,22 @@ public class Task {
     }
 
     public void setStatus(String status) {
-        if (status.equals("todo") || status.equals("in-progress") || status.equals("completed")) {
+        if (status.equals("todo") || status.equals("in-progress") || status.equals("done")) {
             this.status = status;
             updateTimestamp();
-        } else {
-            throw new IllegalArgumentException("Invalid status: " + status);
-        }
+        } else throw new IllegalArgumentException("Invalid status: " + status);
     }
 
-    // Helper method to get the current timestamp
+    // Timestamp management
     private String getCurrentTimestamp() {
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
-    // Update the updatedAt timestamp
     private void updateTimestamp() {
         this.updatedAt = getCurrentTimestamp();
     }
 
-    // Convert Task object to a formatted string
+    // Convert Task object to String
     @Override
     public String toString() {
         return "Task ID: " + id + "\nDescription: " + description + "\nStatus: " + status +
