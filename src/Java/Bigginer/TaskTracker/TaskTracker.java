@@ -1,8 +1,7 @@
-package Java.Bigginer.TaskTracker.src;
+package Java.Bigginer.TaskTracker;
 
 import java.util.List;
 import java.util.Scanner;
-import Java.Bigginer.TaskTracker.*
 
 public class TaskTrackerCLI {
     public static void main(String[] args) {
@@ -52,7 +51,7 @@ public class TaskTrackerCLI {
         Task task = new Task(description);
         tasks.add(task);
         JsonHandler.writeTasks(tasks);
-        System.out.println("Task added successfully (ID: " + task.getId() + ")");
+        System.out.println("Java.Bigginer.TaskTracker.Task added successfully (ID: " + task.getId() + ")");
     }
 
     private static void updateTask(String input) {
@@ -69,11 +68,11 @@ public class TaskTrackerCLI {
             if (task.getId() == id) {
                 task.update(newDescription);
                 JsonHandler.writeTasks(tasks);
-                System.out.println("Task updated.");
+                System.out.println("Java.Bigginer.TaskTracker.Task updated.");
                 return;
             }
         }
-        System.out.println("Task not found.");
+        System.out.println("Java.Bigginer.TaskTracker.Task not found.");
     }
 
     private static void deleteTask(String idStr) {
@@ -81,7 +80,7 @@ public class TaskTrackerCLI {
         int id = Integer.parseInt(idStr);
         tasks.removeIf(task -> task.getId() == id);
         JsonHandler.writeTasks(tasks);
-        System.out.println("Task deleted.");
+        System.out.println("Java.Bigginer.TaskTracker.Task deleted.");
     }
 
     private static void markTask(String idStr, String status) {
@@ -92,11 +91,11 @@ public class TaskTrackerCLI {
                 if (status.equals("in-progress")) task.markInProgress();
                 else task.markDone();
                 JsonHandler.writeTasks(tasks);
-                System.out.println("Task marked as " + status);
+                System.out.println("Java.Bigginer.TaskTracker.Task marked as " + status);
                 return;
             }
         }
-        System.out.println("Task not found.");
+        System.out.println("Java.Bigginer.TaskTracker.Task not found.");
     }
 
     private static void listTasks(String filter) {

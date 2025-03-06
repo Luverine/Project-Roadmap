@@ -1,4 +1,4 @@
-package Java.Begginer.TaskTracker;
+package Java.Bigginer.TaskTracker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -8,7 +8,7 @@ public class Task {
 
     private int id;
     private String description;
-    private String status; // "todo", "in-progress", "done"
+    private String status; // "todo", "in-progress", "completed"
     private String createdAt;
     private String updatedAt;
 
@@ -35,13 +35,13 @@ public class Task {
         this.updatedAt = getCurrentTimestamp();
     }
 
-    // Convert Task to JSON string
+    // Convert Java.Bigginer.TaskTracker.Task to JSON string
     public String toJson() {
         return String.format("{\"id\":%d,\"description\":\"%s\",\"status\":\"%s\",\"createdAt\":\"%s\",\"updatedAt\":\"%s\"}",
                 id, description, status, createdAt, updatedAt);
     }
 
-    // Convert JSON string to Task object
+    // Convert JSON string to Java.Bigginer.TaskTracker.Task object
     public static Task fromJson(String json) {
         String[] parts = json.replace("{", "").replace("}", "").split(",");
         int id = Integer.parseInt(parts[0].split(":")[1]);
