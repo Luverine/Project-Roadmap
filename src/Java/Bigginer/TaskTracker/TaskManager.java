@@ -39,4 +39,16 @@ public class TaskManager {
             System.out.println("Task deleted successfully.");
         } else System.out.println("Task ID not found.");
     }
+
+    private void saveTasksToJson() {
+    }
+
+    public void changeTaskStatus(int id, String statusArg) {
+    }
+
+    public void listTasks() {
+    }
+
+    public void listTaskByStatus(String argument) {
+    }
 }

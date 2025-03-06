@@ -53,7 +53,29 @@ public class TaskTracker {
                     if (argument.isEmpty()) taskManager.listTasks();
                     else taskManager.listTaskByStatus(argument);
                     break;
+                case "exit":
+                    System.out.println("Exiting Task Tracker. Goodbye!");
+                    s.close();
+                    return;
+                case "help":
+                    printHelp();
+                    break;
+                default:
+                    System.out.println("Unknown command. Type 'help' for available commands.");
+                    break;
             }
         }
+    }
+
+    private static void printHelp() {
+        System.out.println("\nAvailable Commands :");
+        System.out.println(" add <description>      - Add a new task");
+        System.out.println(" update <id> <desc>     - Update task description");
+        System.out.println(" delete <id>            - Delete a task");
+        System.out.println(" status <id> <status>   - Change task status (todo, in-progress, completed)");
+        System.out.println(" list                   - List all tasks");
+        System.out.println(" list <status>          - List tasks by status");
+        System.out.println(" exit                   - Exit the application");
+
     }
 }
