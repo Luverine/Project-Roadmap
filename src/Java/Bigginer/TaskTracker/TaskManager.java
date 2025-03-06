@@ -10,25 +10,25 @@ public class TaskManager {
     public void addTask(String description) {
         Task newTask = new Task(nextId++, description);
         tasks.add(newTask);
-        System.out.println("Java.Bigginer.TaskTracker.Task added successfully (ID: " + newTask.getId() + ")");
+        System.out.println("Task added successfully (ID: " + newTask.getId() + ")");
     }
 
     public void updateTask(int id, String newDescription) {
         for (Task task : tasks) {
             if (task.getId() == id) {
                 task.setDescription(newDescription);
-                System.out.println("Java.Bigginer.TaskTracker.Task updated successfully.");
+                System.out.println("Task updated successfully.");
                 return;
             }
         }
-        System.out.println("Java.Bigginer.TaskTracker.Task ID not found.");
+        System.out.println("Task ID not found.");
     }
 
     public void deleteTask(int id) {
         if (tasks.removeIf(task -> task.getId() == id)) {
-            System.out.println("Java.Bigginer.TaskTracker.Task deleted successfully.");
+            System.out.println("Task deleted successfully.");
         } else {
-            System.out.println("Java.Bigginer.TaskTracker.Task ID not found.");
+            System.out.println("Task ID not found.");
         }
     }
 
@@ -36,11 +36,11 @@ public class TaskManager {
         for (Task task : tasks) {
             if (task.getId() == id) {
                 task.setStatus(status);
-                System.out.println("Java.Bigginer.TaskTracker.Task status updated to " + status + ".");
+                System.out.println("Task status updated to " + status + ".");
                 return;
             }
         }
-        System.out.println("Java.Bigginer.TaskTracker.Task ID not found.");
+        System.out.println("Task ID not found.");
     }
 
     public void listTasks(String statusFilter) {
