@@ -1,100 +1,109 @@
 package Java.Bigginer.TaskTracker.src;
 
+import java.util.List;
 import java.util.Scanner;
+import Java.Begginer.TaskTracker.*;
 
-public class TaskTracker {
+public class TaskTrackerCLI {
     public static void main(String[] args) {
+        JsonHandler.initializeFile();
         Scanner scanner = new Scanner(System.in);
-        TaskManager taskManager = new TaskManager();
-
-        System.out.println("Welcome to Task Tracker!");
-        System.out.println("Type 'help' to see available commands.");
 
         while (true) {
-            System.out.print("\nEnter command: ");
-            String input = scanner.nextLine().trim();
-            String[] tokens = input.split(" ", 2);
-            String command = tokens[0].toLowerCase();
-            String argument = tokens.length > 1 ? tokens[1] : "";
+            System.out.print("Enter command: ");
+            String input = scanner.nextLine();
+            String[] commandParts = input.split(" ", 2);
+
+            if (commandParts.length == 0) continue;
+
+            String command = commandParts[0];
+            String argument = commandParts.length > 1 ? commandParts[1] : "";
 
             switch (command) {
                 case "add":
-                    if (!argument.isEmpty()) {
-                        taskManager.addTask(argument);
-                    } else {
-                        System.out.println("Usage: add <task_description>");
-                    }
+                    addTask(argument);
                     break;
-
                 case "update":
-                    String[] updateArgs = argument.split(" ", 2);
-                    if (updateArgs.length == 2) {
-                        try {
-                            int id = Integer.parseInt(updateArgs[0]);
-                            taskManager.updateTask(id, updateArgs[1]);
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid task ID.");
-                        }
-                    } else {
-                        System.out.println("Usage: update <task_id> <new_description>");
-                    }
+                    updateTask(argument);
                     break;
-
                 case "delete":
-                    try {
-                        int id = Integer.parseInt(argument);
-                        taskManager.deleteTask(id);
-                    } catch (NumberFormatException e) {
-                        System.out.println("Usage: delete <task_id>");
-                    }
+                    deleteTask(argument);
                     break;
-
-                case "status":
-                    String[] statusArgs = argument.split(" ", 2);
-                    if (statusArgs.length == 2) {
-                        try {
-                            int id = Integer.parseInt(statusArgs[0]);
-                            taskManager.changeTaskStatus(id, statusArgs[1]);
-                        } catch (NumberFormatException e) {
-                            System.out.println("Invalid task ID.");
-                        }
-                    } else {
-                        System.out.println("Usage: status <task_id> <todo|in-progress|done>");
-                    }
+                case "mark-in-progress":
+                    markTask(argument, "in-progress");
                     break;
-
+                case "mark-done":
+                    markTask(argument, "done");
+                    break;
                 case "list":
-                    if (argument.isEmpty()) {
-                        taskManager.listTasks();
-                    } else {
-                        taskManager.listTasksByStatus(argument);
-                    }
+                    listTasks(argument);
                     break;
-
                 case "exit":
-                    System.out.println("Exiting Task Tracker. Goodbye!");
-                    scanner.close();
+                    System.out.println("Exiting...");
                     return;
-
-                case "help":
-                    printHelp();
-                    break;
-
                 default:
-                    System.out.println("Unknown command. Type 'help' for available commands.");
-                    break;
+                    System.out.println("Invalid command!");
             }
         }
     }
 
-    private static void printHelp() {
-        System.out.println("\nAvailable Commands:");
-        System.out.println("  add <description>       - Add a new task");
-        System.out.println("  update <id> <desc>      - Update task description");
-        System.out.println("  delete <id>             - Delete a task");
-        System.out.println("  status <id> <status>    - Change task status (todo, in-progress, done)");
-        System.out.println("  list                    - List all tasks");
-        System.out.println("  list <status>           - List tasks by status");
-        System.out.println("  exit                    - Exit the application");
+    private static void addTask(String description) {
+        List<Task> tasks = JsonHandler.readTasks();
+        Task task = new Task(description);
+        tasks.add(task);
+        JsonHandler.writeTasks(tasks);
+        System.out.println("Task added successfully (ID: " + task.getId() + ")");
+    }
+
+    private static void updateTask(String input) {
+        List<Task> tasks = JsonHandler.readTasks();
+        String[] parts = input.split(" ", 2);
+        if (parts.length < 2) {
+            System.out.println("Usage: update <id> <new description>");
+            return;
+        }
+        int id = Integer.parseInt(parts[0]);
+        String newDescription = parts[1];
+
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                task.update(newDescription);
+                JsonHandler.writeTasks(tasks);
+                System.out.println("Task updated.");
+                return;
+            }
+        }
+        System.out.println("Task not found.");
+    }
+
+    private static void deleteTask(String idStr) {
+        List<Task> tasks = JsonHandler.readTasks();
+        int id = Integer.parseInt(idStr);
+        tasks.removeIf(task -> task.getId() == id);
+        JsonHandler.writeTasks(tasks);
+        System.out.println("Task deleted.");
+    }
+
+    private static void markTask(String idStr, String status) {
+        List<Task> tasks = JsonHandler.readTasks();
+        int id = Integer.parseInt(idStr);
+        for (Task task : tasks) {
+            if (task.getId() == id) {
+                if (status.equals("in-progress")) task.markInProgress();
+                else task.markDone();
+                JsonHandler.writeTasks(tasks);
+                System.out.println("Task marked as " + status);
+                return;
+            }
+        }
+        System.out.println("Task not found.");
+    }
+
+    private static void listTasks(String filter) {
+        List<Task> tasks = JsonHandler.readTasks();
+        for (Task task : tasks) {
+            if (filter.isEmpty() || task.getStatus().equals(filter))
+                System.out.println(task);
+        }
     }
 }

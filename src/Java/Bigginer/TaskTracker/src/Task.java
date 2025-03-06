@@ -1,57 +1,72 @@
-package Java.Bigginer.TaskTracker.src;
+package Java.Begginer.TaskTracker;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    private final int id;
+    private static int idCounter = 1;
+
+    private int id;
     private String description;
     private String status; // "todo", "in-progress", "done"
     private String createdAt;
     private String updatedAt;
 
-    // Constructor
-    public Task(int id, String description) {
-        this.id = id;
+    public Task(String description) {
+        this.id = idCounter++;
         this.description = description;
         this.status = "todo"; // Default status
         this.createdAt = getCurrentTimestamp();
         this.updatedAt = this.createdAt;
     }
 
-    // Getters
-    public int getId() { return id; }
-    public String getDescription() { return description; }
-    public String getStatus() { return status; }
-    public String getCreatedAt() { return createdAt; }
-    public String getUpdatedAt() { return updatedAt; }
-
-    // Setters
-    public void setDescription(String description) {
-        this.description = description;
-        updateTimestamp();
-    }
-
-    public void setStatus(String status) {
-        if (status.equals("todo") || status.equals("in-progress") || status.equals("done")) {
-            this.status = status;
-            updateTimestamp();
-        } else throw new IllegalArgumentException("Invalid status: " + status);
-    }
-
-    // Timestamp management
-    private String getCurrentTimestamp() {
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-    }
-
-    private void updateTimestamp() {
+    public void update(String newDescription) {
+        this.description = newDescription;
         this.updatedAt = getCurrentTimestamp();
     }
 
-    // Convert Task object to String
+    public void markInProgress() {
+        this.status = "in-progress";
+        this.updatedAt = getCurrentTimestamp();
+    }
+
+    public void markDone() {
+        this.status = "done";
+        this.updatedAt = getCurrentTimestamp();
+    }
+
+    // Convert Task to JSON string
+    public String toJson() {
+        return String.format("{\"id\":%d,\"description\":\"%s\",\"status\":\"%s\",\"createdAt\":\"%s\",\"updatedAt\":\"%s\"}",
+                id, description, status, createdAt, updatedAt);
+    }
+
+    // Convert JSON string to Task object
+    public static Task fromJson(String json) {
+        String[] parts = json.replace("{", "").replace("}", "").split(",");
+        int id = Integer.parseInt(parts[0].split(":")[1]);
+        String description = parts[1].split(":")[1].replace("\"", "");
+        String status = parts[2].split(":")[1].replace("\"", "");
+        String createdAt = parts[3].split(":")[1].replace("\"", "");
+        String updatedAt = parts[4].split(":")[1].replace("\"", "");
+
+        Task task = new Task(description);
+        task.id = id;
+        task.status = status;
+        task.createdAt = createdAt;
+        task.updatedAt = updatedAt;
+        return task;
+    }
+
+    private static String getCurrentTimestamp() {
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+    }
+
     @Override
     public String toString() {
-        return "Task ID: " + id + "\nDescription: " + description + "\nStatus: " + status +
-                "\nCreated At: " + createdAt + "\nUpdated At: " + updatedAt + "\n";
+        return String.format("[%d] %s (%s)", id, description, status);
     }
+
+    public int getId() { return id; }
+    public String getStatus() { return status; }
 }

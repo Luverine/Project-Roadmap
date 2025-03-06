@@ -1,47 +1,60 @@
 package Java.Bigginer.TaskTracker.src;
 
 import java.io.*;
-import lib.javax.json.*;
 import java.nio.file.*;
+import java.util.*;
 
-
-public class jsonHandler {
+public class JsonHandler {
     private static final String FILE_NAME = "tasks.json";
 
-    // Initialize JSON File
+    // Ensure file exists
     public static void initializeFile() {
+        if (!Files.exists(Paths.get(FILE_NAME))) {
+            try (FileWriter file = new FileWriter(FILE_NAME)) {
+                file.write("[]"); // Initialize with empty JSON array
+            } catch (IOException e) {
+                System.out.println("Error creating JSON file: " + e.getMessage());
+            }
+        }
+    }
+
+    // Read JSON from file and return list of tasks
+    public static List<Task> readTasks() {
+        List<Task> tasks = new ArrayList<>();
         try {
-            if (!Files.exists(Path.of(FILE_NAME))) Files.write(Path.of(FILE_NAME), "[]".getBytes());
+            String content = new String(Files.readAllBytes(Paths.get(FILE_NAME)));
+            if (content.trim().isEmpty()) return tasks; // Handle empty file
+
+            // Manually parse JSON (very simple)
+            if (content.startsWith("[") && content.endsWith("]")) {
+                String[] taskStrings = content.substring(1, content.length() - 1).split("},\\{");
+                for (String taskString : taskStrings) {
+                    if (!taskString.startsWith("{")) taskString = "{" + taskString;
+                    if (!taskString.endsWith("}")) taskString += "}";
+
+                    Task task = Task.fromJson(taskString);
+                    tasks.add(task);
+                }
+            }
         } catch (IOException e) {
-            System.out.println("Error initializing JSON file: " + e.getMessage());
-        }
-    }
-
-    // Read tasks from JSON file
-    public static JsonArray readTasks() {
-        try {
-            InputStream is = new FileInputStream(FILE_NAME);
-            JsonReader reader = Json.createReader(is);
-            JsonArray tasks = reader.readArray();
-            reader.close();
-            return tasks;
-        } catch (Exception e) {
             System.out.println("Error reading tasks: " + e.getMessage());
-            return Json.createArrayBuilder().build();
         }
+        return tasks;
     }
 
+    // Write list of tasks to JSON file
+    public static void writeTasks(List<Task> tasks) {
+        try (FileWriter file = new FileWriter(FILE_NAME)) {
+            StringBuilder json = new StringBuilder("[");
+            for (Task task : tasks) {
+                json.append(task.toJson()).append(",");
+            }
+            if (!tasks.isEmpty()) json.deleteCharAt(json.length() - 1);
+            json.append("]");
 
-    // Write tasks to JSON file
-    public static void writeTasks(JsonArray tasks) {
-        try {
-            OutputStream os = new FileOutputStream(FILE_NAME);
-            JsonWriter writer = Json.createWriter(os);
-            writer.writeArray(tasks);
-            writer.close();
+            file.write(json.toString());
         } catch (IOException e) {
             System.out.println("Error writing tasks: " + e.getMessage());
         }
     }
-
 }
