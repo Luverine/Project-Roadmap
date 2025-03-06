@@ -6,7 +6,7 @@ import java.nio.file.*;
 
 
 public class jsonHandler {
-    private static final String FILE_NAME = "Json/task.json";
+    private static final String FILE_NAME = "task.json";
 
     // check whether the file exists or not
     public static boolean exists() {
