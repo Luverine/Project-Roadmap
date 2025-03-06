@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    private int id;
+    private final int id;
     private String description;
     private String status; // "todo", "in-progress", "completed"
     private String createdAt;
