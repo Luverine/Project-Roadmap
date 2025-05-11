@@ -1,8 +1,8 @@
 # Project-RoadMap
 
-** Projects available here are **
+**Projects available here are**
 
-1. ** Task Tracker (Backend)**
+1. **Task Tracker (Backend)**
    ```bash
    https://roadmap.sh/projects/task-tracker
    ```
