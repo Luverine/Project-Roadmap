@@ -9,6 +9,11 @@ This is a simple command-line interface(CLI) application written in java that fe
 - **Error Handling:** Gracefully handles errors such as invalid usernames or API failures.
 - **No External Libraries:** Uses only Java's build-in classes for HTTP request and basic string processing.
 
+## **Project URL**
+ ```bash
+   https://roadmap.sh/projects/github-user-activity
+```
+
 ## Requirements
 
 - Since i have used **Java 23** it would be better if used, but at least it should be higher then **Java 8**.
@@ -37,6 +42,8 @@ This is a simple command-line interface(CLI) application written in java that fe
       - Created repository username/repo_name
       - WatchEvent in Username/repo_name
    ```
+   
+---
 ## How It Works
 
 1. **Command Line Argument**
@@ -47,6 +54,8 @@ This is a simple command-line interface(CLI) application written in java that fe
    - The response is received as a JSON string. THe code then does a simple split on ```"},{"``` to separate indivisual event objects.
    - Depending on the event type (e.g. ```PushEvent```, ```IssuesEvent```, ```CreatEvent```), the application formats and prints a summary message to the terminal.
    - For each event, key fields such as ```type``` and ```repo``` are exception occurs, a corresponding error message is displayed.
+
+---
 ## Optional Enhancements
 
 - **Filter by Event Type** : Add an option to filter events by type (for example, only show ```PushEvent``` or ```IssuesEvent```).
