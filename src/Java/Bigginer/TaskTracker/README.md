@@ -17,21 +17,13 @@ This is a simple command-line interface (CLI) application built in **Java** to h
   https://roadmap.sh/projects/task-tracker
 ```
 
-## Setup
-
-1. **Clone the repository** (or copy the code):
-
-   ```bash
-   git clone https://github.com/Luverine/Project-Roadmap.git
-   ```
-
-2. **Compile the Java files** (if not using an IDE like IntelliJ or Eclipse):
+1. **Compile the Java files** (if not using an IDE like IntelliJ or Eclipse):
 
    ```bash
    javac Task.java TaskTracker.java TaskManager.java
    ```
 
-3. **Run the program**:
+2. **Run the program**:
 
    ```bash
    java TaskTracker
