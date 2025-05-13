@@ -11,3 +11,14 @@
    ```bash
    https://roadmap.sh/projects/github-user-activity
    ```
+---
+
+## HOW TO USE
+
+### Setup
+
+**Clone the repository** (or copy the code):
+
+   ```bash
+      git clone https://github.com/Luverine/Project-Roadmap.git
+   ```
