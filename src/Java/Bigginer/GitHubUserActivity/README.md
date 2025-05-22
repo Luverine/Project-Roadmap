@@ -56,12 +56,6 @@ This is a simple command-line interface(CLI) application written in java that fe
    - For each event, key fields such as ```type``` and ```repo``` are exception occurs, a corresponding error message is displayed.
 
 ---
-## Optional Enhancements
-
-- **Filter by Event Type** : Add an option to filter events by type (for example, only show ```PushEvent``` or ```IssuesEvent```).
-- **Improved Json Parsing** : Although this version uses simple string manipulation, a robust JSON parser could be integrated if external libraries were allowed.
-- **Caching** : Cache fetched data to avoid hitting API rate limits or improve performance.
-- **Structured Formating** : Use better formating (for example, table layouts) for displaying events.
 ## License
 
 This project is open-source. Feel free to use, modify, and distribute it as needed.
